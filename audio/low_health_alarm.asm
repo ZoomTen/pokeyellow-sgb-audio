@@ -19,9 +19,13 @@ Music_DoLowHealthAlarm::
 	call .playToneLo  ;actually set the sound registers.
 
 .asm_2138a
+	ldh a, [hGBC]
+	and a
+	jr nz, .cont_gbc
 	ld a, [wOnSGB]
 	and a
 	jr nz, .continue_0		; skip if on SGB
+.cont_gbc
 	ld a, $86
 	ld [wChannelSoundIDs + Ch5], a ;disable sound channel?
 .continue_0
@@ -54,6 +58,9 @@ Music_DoLowHealthAlarm::
 
 ;update sound channel 1 to play the alarm, overriding all other sounds.
 .playTone
+	ldh a, [hGBC]
+	and a
+	jr nz, .notSGB
 	ld a, [wOnSGB]
 	and a
 	jr z, .notSGB

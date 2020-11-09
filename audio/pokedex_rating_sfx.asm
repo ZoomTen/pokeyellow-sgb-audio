@@ -17,6 +17,9 @@ PlayPokedexRatingSfx::
 	ld a, [hli]
 	ld c, [hl]
 	call PlayMusic
+	ldh a, [hGBC]
+	and a
+	jp nz, PlayDefaultMusic
 	ld a, [wOnSGB]
 	and a
 	jp z, PlayDefaultMusic

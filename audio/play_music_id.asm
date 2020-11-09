@@ -38,10 +38,14 @@ _PlayMusicID::
 	ld [wAudioROMBank], a
 	ld [wMusicIDBank], a
 .check_sgb
+	ldh a, [hGBC]
+	and a
+	jr nz, .continue_gb
 	ld a, [wOnSGB]
 	and a
 	jr nz, .play_sgb
 
+.continue_gb
 	xor a
 	ld [wCheckAndFadeMusicID], a
 
@@ -78,9 +82,13 @@ _PlayMusicID::
 	jp .overwrite_pointer
 
 .stop_sound
+	ldh a, [hGBC]
+	and a
+	jr nz, .stop_gbc
 	ld a, [wOnSGB]
 	and a
 	jr nz, .stop_sgb
+.stop_gbc
 	xor a
 	ld [wCheckAndFadeMusicID], a
 	ld a, $FF

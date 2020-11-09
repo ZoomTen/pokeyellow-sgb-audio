@@ -157,6 +157,9 @@ Audio1_PlayNextNote:
 	add hl, bc
 	res BIT_PITCH_SLIDE_ON, [hl]
 	res BIT_PITCH_SLIDE_DECREASING, [hl]
+	ldh a, [hGBC]
+	and a
+	jr nz, .gb
 	ld a, [wOnSGB]
 	and a
 	jr z, .gb

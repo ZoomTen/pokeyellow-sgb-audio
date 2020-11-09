@@ -272,15 +272,18 @@ PlayMusicID::
 	ret
 
 DuckMusicOnSGB::
-	ld a, [wOnSGB]
-	and a
-	ret z
 	homecall Trn_DuckMusic
 	ret
 
 UnduckMusicOnSGB::
-	ld a, [wOnSGB]
-	and a
-	ret z
 	homecall Trn_UnduckMusic
 	ret
+
+SGBorGBC::
+	; carry is set if gbc
+	ldh a, [hGBC]
+	and a
+	ret z
+	scf
+	ret
+	ret nz

@@ -624,6 +624,14 @@ Trn_UnfreezeSGBScreen:
 
 Trn_DuckMusic::
 	di
+	ld a, [wOnSGB]
+	and a
+	jr nz, .sgb
+	call SGBorGBC
+	jr nc, .sgb
+	reti
+	ret
+.sgb
 	ld hl, DuckMusicPacket
 	call SendSGBPacket
 	ld hl, UpdateVolumePacket
@@ -632,6 +640,13 @@ Trn_DuckMusic::
 
 Trn_UnduckMusic::
 	di
+	ld a, [wOnSGB]
+	and a
+	jr nz, .sgb
+	call SGBorGBC
+	jr nc, .sgb
+	reti
+.sgb
 	ld hl, UnduckMusicPacket
 	call SendSGBPacket
 	ld hl, UpdateVolumePacket
