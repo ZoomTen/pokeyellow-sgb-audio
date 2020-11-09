@@ -98,7 +98,10 @@ GaryScript3:
 	ret
 
 GaryScript4:
-	farcall Music_Cities1AlternateTempo
+	xor a
+	ld [wCheckAndFadeMusicID], a
+	ld a, Mus_Ending
+	call PlayMusicID
 	ld a, $2
 	ldh [hSpriteIndexOrTextID], a
 	call GaryScript_760c8

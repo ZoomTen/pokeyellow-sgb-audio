@@ -51,13 +51,8 @@ DisplayPokemonCenterDialogue_::
 	farcall AnimateHealingMachine ; do the healing machine animation
 	predef HealParty
 	xor a
-	ld [wAudioFadeOutControl], a
-	ld a, [wAudioSavedROMBank]
-	ld [wAudioROMBank], a
-	ld a, [wMapMusicSoundID]
-	ld [wLastMusicSoundID], a
-	ld [wNewSoundID], a
-	call PlaySound
+	ld [wCheckAndFadeMusicID], a
+	call PlayDefaultMusic
 	call CheckPikachuFollowingPlayer
 	jr nz, .doNotReturnPikachu
 	callfar IsStarterPikachuInOurParty

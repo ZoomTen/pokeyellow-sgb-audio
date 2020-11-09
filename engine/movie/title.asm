@@ -144,9 +144,8 @@ DisplayTitleScreen:
 	call TitleScreen_PlayPikachuPCM
 	call WaitForSoundToFinish
 	call StopAllMusic
-	ld a, MUSIC_TITLE_SCREEN
-	ld [wNewSoundID], a
-	call PlaySound
+	ld a, Mus_TitleScreen
+	call PlayMusicID
 .loop
 	xor a
 	ld [wUnusedCC5B], a

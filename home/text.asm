@@ -529,9 +529,13 @@ TextCommand_SOUND::
 	jr z, .pokemonCry
 	cp TX_SOUND_CRY_DEWGONG
 	jr z, .pokemonCry
+	push hl
+	call DuckMusicOnSGB
+	pop hl
 	ld a, [hl]
 	call PlaySound
 	call WaitForSoundToFinish
+	call UnduckMusicOnSGB
 	pop hl
 	pop bc
 	jp NextTextCommand

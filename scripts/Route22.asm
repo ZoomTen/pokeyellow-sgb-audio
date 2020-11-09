@@ -91,9 +91,10 @@ Route22Script0:
 	jr z, .asm_50f4e
 	call StopAllMusic
 .asm_50f4e
-	ld c, BANK(Music_MeetRival)
-	ld a, MUSIC_MEET_RIVAL
-	call PlayMusic
+	xor a
+	ld [wCheckAndFadeMusicID], a	; prevent fading in
+	ld a, Mus_MeetRival
+	call PlayMusicID
 	ld a, $1
 	ldh [hSpriteIndex], a
 	call Route22MoveRivalSprite
@@ -172,7 +173,10 @@ Route22Script2:
 	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	call StopAllMusic
-	farcall Music_RivalAlternateStart
+	xor a
+	ld [wCheckAndFadeMusicID], a	; prevent fading in
+	ld a, Mus_MeetRival2
+	call PlayMusicID
 	ld a, [wcf0d]
 	cp $1
 	jr nz, .asm_50fff
@@ -246,7 +250,10 @@ Route22Script_5104e:
 	call StopAllMusic
 .skipYVisibilityTesta
 	call StopAllMusic
-	farcall Music_RivalAlternateTempo
+	xor a
+	ld [wCheckAndFadeMusicID], a	; prevent fading in
+	ld a, Mus_MeetRival
+	call PlayMusicID
 	ld a, $2
 	ldh [hSpriteIndex], a
 	call Route22MoveRivalSprite
@@ -325,7 +332,10 @@ Route22Script5:
 	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	call StopAllMusic
-	farcall Music_RivalAlternateStartAndTempo
+	xor a
+	ld [wCheckAndFadeMusicID], a	; prevent fading in
+	ld a, Mus_MeetRival2
+	call PlayMusicID
 	ld a, [wcf0d]
 	cp $1
 	jr nz, .asm_51134

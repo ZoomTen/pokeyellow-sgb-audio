@@ -1,3 +1,4 @@
+; XXX: Kept for reference
 ; an alternate start for MeetRival which has a different first measure
 Music_RivalAlternateStart::
 	ld c, BANK(Music_MeetRival)

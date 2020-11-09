@@ -33,9 +33,10 @@ AnimateHallOfFame:
 .skipInc
 	ld a, $90
 	ldh [hWY], a
-	ld c, BANK(Music_HallOfFame)
-	ld a, MUSIC_HALL_OF_FAME
-	call PlayMusic
+	ld a, %00000010
+	ld [wCheckAndFadeMusicID], a	; fade in HoF music
+	ld a, Mus_HallOfFame
+	call PlayMusicID
 	ld hl, wPartySpecies
 	ld c, $ff
 .partyMonLoop

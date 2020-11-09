@@ -39,10 +39,8 @@ PalletTownScript0:
 	ld a, PLAYER_DIR_UP
 	ld [wPlayerMovingDirection], a
 	call StopAllMusic
-	ld a, BANK(Music_MeetProfOak)
-	ld c, a
-	ld a, MUSIC_MEET_PROF_OAK ; "oak appears" music
-	call PlayMusic
+	ld a, Mus_MeetProfOak ; "oak appears" music
+	call PlayMusicID
 	SetEvent EVENT_OAK_APPEARED_IN_PALLET
 
 	; trigger the next script

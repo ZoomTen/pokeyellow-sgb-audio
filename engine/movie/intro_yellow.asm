@@ -850,9 +850,8 @@ InitYellowIntroGFXAndMusic:
 	ld [hli], a
 	ld [hli], a
 	ld [hl], a
-	ld a, MUSIC_YELLOW_INTRO
-	ld c, BANK(Music_YellowIntro)
-	call PlayMusic
+	ld a, Mus_YellowIntro
+	call PlayMusicID
 	ret
 
 LoadYellowIntroObjectAnimationDataPointers:

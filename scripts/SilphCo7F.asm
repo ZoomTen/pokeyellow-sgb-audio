@@ -131,9 +131,10 @@ SilphCo7Script0:
 	ld a, PLAYER_DIR_DOWN
 	ld [wPlayerMovingDirection], a
 	call StopAllMusic
-	ld c, BANK(Music_MeetRival)
-	ld a, MUSIC_MEET_RIVAL
-	call PlayMusic
+	xor a
+	ld [wCheckAndFadeMusicID], a	; prevent fading in
+	ld a, Mus_MeetRival
+	call PlayMusicID
 	ld a, $9
 	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
@@ -208,7 +209,10 @@ SilphCo7Script4:
 	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	call StopAllMusic
-	farcall Music_RivalAlternateStart
+	xor a
+	ld [wCheckAndFadeMusicID], a	; prevent fading in
+	ld a, Mus_MeetRival2
+	call PlayMusicID
 	ld de, MovementData_51d1d
 	ld a, [wcf0d]
 	cp $1

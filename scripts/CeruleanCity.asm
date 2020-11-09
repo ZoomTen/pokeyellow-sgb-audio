@@ -62,15 +62,11 @@ CeruleanCityScript0:
 	call ArePlayerCoordsInArray
 	ret nc
 	ld a, [wWalkBikeSurfState]
-	and a
-	jr z, .asm_19512
-	call StopAllMusic
-.asm_19512
-	ld c, BANK(Music_MeetRival)
-	ld a, MUSIC_MEET_RIVAL
-	call PlayMusic
 	xor a
 	ldh [hJoyHeld], a
+	ld [wCheckAndFadeMusicID], a	; prevent fading in
+	ld a, Mus_MeetRival
+	call PlayMusicID
 	ld a, $f0
 	ld [wJoyIgnore], a
 	ld a, [wXCoord]
@@ -155,7 +151,10 @@ CeruleanCityScript2:
 	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	call StopAllMusic
-	farcall Music_RivalAlternateStart
+	xor a
+	ld [wCheckAndFadeMusicID], a	; prevent fading in
+	ld a, Mus_MeetRival2
+	call PlayMusicID
 	ld a, $1
 	ldh [hSpriteIndex], a
 	call SetSpriteMovementBytesToFF

@@ -442,6 +442,7 @@ ShowPokedexDataInternal:
 	set 1, [hl]
 	ld a, $33 ; 3/7 volume
 	ldh [rNR50], a
+	call DuckMusicOnSGB
 	ldh a, [hTilesetType]
 	push af
 	xor a
@@ -472,6 +473,7 @@ ShowPokedexDataInternal:
 	res 1, [hl]
 	ld a, $77 ; max volume
 	ldh [rNR50], a
+	call UnduckMusicOnSGB
 	ret
 
 HeightWeightText:

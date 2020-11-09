@@ -9,9 +9,7 @@ PlayPokedexRatingSfx::
 	inc hl
 	jr .getSfxPointer
 .gotSfxPointer
-	push bc
-	call StopAllMusic
-	pop bc
+	call DuckMusicOnSGB
 	ld b, $0
 	ld hl, PokedexRatingSfxPointers
 	add hl, bc
@@ -19,7 +17,12 @@ PlayPokedexRatingSfx::
 	ld a, [hli]
 	ld c, [hl]
 	call PlayMusic
-	jp PlayDefaultMusic
+	ld a, [wOnSGB]
+	and a
+	jp z, PlayDefaultMusic
+	ld a, SFX_STOP_ALL_MUSIC
+	call PlaySoundWaitForCurrent
+	jp UnduckMusicOnSGB
 
 PokedexRatingSfxPointers:
 	db SFX_DENIED,         BANK(SFX_Denied_3)

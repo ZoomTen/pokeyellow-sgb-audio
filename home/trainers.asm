@@ -380,6 +380,8 @@ TrainerEndBattleText::
 	jp TextScriptEnd
 
 PlayTrainerMusic::
+	xor a
+	ld [wCheckAndFadeMusicID], a	; prevent trainer music from fading in
 	ld a, [wEngagedTrainerClass]
 	cp OPP_RIVAL1
 	ret z
@@ -405,7 +407,7 @@ PlayTrainerMusic::
 	jr z, .noEvilTrainer
 	cp b
 	jr nz, .evilTrainerListLoop
-	ld a, MUSIC_MEET_EVIL_TRAINER
+	ld a, Mus_MeetEvilTrainer
 	jr .PlaySound
 .noEvilTrainer
 	ld hl, FemaleTrainerList
@@ -415,12 +417,11 @@ PlayTrainerMusic::
 	jr z, .maleTrainer
 	cp b
 	jr nz, .femaleTrainerListLoop
-	ld a, MUSIC_MEET_FEMALE_TRAINER
+	ld a, Mus_MeetFemaleTrainer
 	jr .PlaySound
 .maleTrainer
-	ld a, MUSIC_MEET_MALE_TRAINER
+	ld a, Mus_MeetMaleTrainer
 .PlaySound
-	ld [wNewSoundID], a
-	jp PlaySound
+	jp PlayMusicID
 
 INCLUDE "data/trainers/encounter_types.asm"

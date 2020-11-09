@@ -23,9 +23,10 @@ PokemonTower2Script0:
 	call ArePlayerCoordsInArray
 	ret nc
 	call StopAllMusic
-	ld c, BANK(Music_MeetRival)
-	ld a, MUSIC_MEET_RIVAL
-	call PlayMusic
+	xor a
+	ld [wCheckAndFadeMusicID], a	; prevent fading in
+	ld a, Mus_MeetRival
+	call PlayMusicID
 	ResetEvent EVENT_POKEMON_TOWER_RIVAL_ON_LEFT
 	ld a, [wCoordIndex]
 	cp $1
@@ -76,7 +77,10 @@ PokemonTower2Script1:
 	ldh [hSpriteIndex], a
 	call MoveSprite
 	call StopAllMusic
-	farcall Music_RivalAlternateStart
+	xor a
+	ld [wCheckAndFadeMusicID], a	; prevent fading in
+	ld a, Mus_MeetRival2
+	call PlayMusicID
 	ld a, $2
 	ld [wPokemonTower2FCurScript], a
 	ld [wCurMapScript], a

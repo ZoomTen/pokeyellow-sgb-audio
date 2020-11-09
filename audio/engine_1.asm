@@ -157,17 +157,24 @@ Audio1_PlayNextNote:
 	add hl, bc
 	res BIT_PITCH_SLIDE_ON, [hl]
 	res BIT_PITCH_SLIDE_DECREASING, [hl]
+	ld a, [wOnSGB]
+	and a
+	jr z, .gb
+	ld a, c
+	cp $5
+	jr nz, .beginChecks
+	jr .lowhealth
+.gb
 	ld a, c
 	cp $4
-	jr nz, .asm_918c
+	jr nz, .beginChecks
+.lowhealth
 	ld a, [wLowHealthAlarm]
 	bit 7, a
-	jr z, .asm_918c
+	jr z, .beginChecks
 	call Audio1_EnableChannelOutput
 	ret
-.asm_918c
-	call Audio1_sound_ret
-	ret
+.beginChecks
 
 Audio1_sound_ret:
 	call Audio1_GetNextMusicByte

@@ -28,9 +28,8 @@ HallOfFamePC:
 	call CreditsCopyTileMapToVRAM
 	ld hl, vBGMap0
 	call CreditsCopyTileMapToVRAM
-	ld c, BANK(Music_Credits)
-	ld a, MUSIC_CREDITS
-	call PlayMusic
+	ld a, Mus_Credits
+	call PlayMusicID
 	ld c, 128
 	call DelayFrames
 	xor a

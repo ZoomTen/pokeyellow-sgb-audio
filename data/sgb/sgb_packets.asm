@@ -45,6 +45,11 @@ MASK_EN: MACRO
 	ds 14, 0
 ENDM
 
+SOU_TRN: MACRO
+	db ($9 << 3) + 1
+	ds 15, 0
+ENDM
+
 DATA_SND: MACRO
 	db ($f << 3) + 1
 	dw \1 ; address
@@ -52,6 +57,24 @@ DATA_SND: MACRO
 	db \3 ; length (1-11)
 ENDM
 
+
+SOUND: MACRO
+	db ($8 << 3) + 1
+	db \1 ; Sound Effect A (Port 1) Decrescendo 8bit Sound Code
+	db \2 ; Sound Effect B (Port 2) Sustain     8bit Sound Code
+	db \3 ; Sound Effect Attributes
+	db \4 ; Music Score Code
+	ds 11, 0
+ENDM
+
+JUMP: MACRO
+	db ($12 << 3) + 1
+	dw \1 ; set program counter
+	db \2 ; bank
+	dw \3 ; set interrupt handler
+	db \4 ; bank
+	ds 9, 0
+ENDM
 
 BlkPacket_WholeScreen:
 	ATTR_BLK 1
@@ -135,6 +158,8 @@ UnknownPacket_72751:
 	ATTR_BLK_DATA %111, 1,1,0, 04,00, 15,05
 	ds 8
 
+SoundTransferPacket: SOU_TRN
+SoundEnablePacket: SOUND 0, 0, 0, 1
 
 PalPacket_Empty:          PAL_SET 0, 0, 0, 0
 PalPacket_PartyMenu:      PAL_SET PAL_MEWMON, PAL_GREENBAR, PAL_YELLOWBAR, PAL_REDBAR
@@ -242,3 +267,25 @@ DataSnd_72911:
 	db  $60                 ; rts
 	db  $EA                 ; nop
 	db  $EA                 ; nop
+
+;  SNES code
+
+JumpToMSU1EntryPoint: JUMP $1810, 0, 0, 0
+MSU1SoundTemplate:: DATA_SND $1800, $0, 5
+	;   R #l #h  V    M
+	db  1, 0, 0, $FF, 0
+	ds 6, 0
+UpdateVolumePacket:: DATA_SND $1800, $0, 1
+	db  %01000000
+	ds 10, 0
+
+StopMusicPacket:: DATA_SND $1800, $0, 1
+	db  %00100000
+	ds 10, 0
+DuckMusicPacket:: DATA_SND $1807, $0, 1
+	db  255/3
+	ds 10, 0
+UnduckMusicPacket:: DATA_SND $1807, $0, 1
+	db  0
+	ds 10, 0
+INCLUDE "audio/msu1/_bootstrap.asm"

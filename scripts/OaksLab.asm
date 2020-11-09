@@ -312,9 +312,10 @@ OaksLabScript12:
 	xor a ; SPRITE_FACING_DOWN
 	ldh [hSpriteFacingDirection], a
 	call SetSpriteFacingDirectionAndDelay
-	ld c, BANK(Music_MeetRival)
-	ld a, MUSIC_MEET_RIVAL
-	call PlayMusic
+	xor a
+	ld [wCheckAndFadeMusicID], a	; prevent fading in
+	ld a, Mus_MeetRival
+	call PlayMusicID
 	ld a, $b
 	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
@@ -402,7 +403,10 @@ OaksLabScript15:
 	ld a, $c
 	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
-	farcall Music_RivalAlternateStart
+	xor a
+	ld [wCheckAndFadeMusicID], a	; prevent fading in
+	ld a, Mus_MeetRival2
+	call PlayMusicID
 	ld a, $1
 	ldh [hSpriteIndex], a
 	ld de, .OaksLabMovement_RivalWalksOut1
@@ -495,7 +499,10 @@ OaksLabScript19:
 	ldh [hJoyHeld], a
 	call EnableAutoTextBoxDrawing
 	call StopAllMusic
-	farcall Music_RivalAlternateStart
+	xor a
+	ld [wCheckAndFadeMusicID], a	; prevent fading in
+	ld a, Mus_MeetRival2
+	call PlayMusicID
 	ld a, $13
 	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
@@ -597,7 +604,10 @@ OaksLabScript20:
 	call FillMemory
 	ld [hl], $ff
 	call StopAllMusic
-	farcall Music_RivalAlternateStart
+	xor a
+	ld [wCheckAndFadeMusicID], a	; prevent fading in
+	ld a, Mus_MeetRival2
+	call PlayMusicID
 	ld a, $1
 	ldh [hSpriteIndexOrTextID], a
 	ld de, wNPCMovementDirections2

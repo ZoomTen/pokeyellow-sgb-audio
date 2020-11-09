@@ -16,6 +16,7 @@ ShakeElevator::
 	add d
 	ldh [hSCY], a
 	push bc
+; Collision is gameboy SFX
 	ld c, BANK(SFX_Collision_1)
 	ld a, SFX_COLLISION
 	call PlayMusic
