@@ -225,9 +225,8 @@ MtMoon3Script_49e15:
 	cp $5
 	ret nz
 	call StopAllMusic
-	ld c, BANK(Music_MeetJessieJames)
-	ld a, MUSIC_MEET_JESSIE_JAMES
-	call PlayMusic
+	ld a, Mus_MeetJessieJames
+	call PlayMusicID
 	xor a
 	ldh [hJoyHeld], a
 	ld a, $FF ^ (A_BUTTON | B_BUTTON)
@@ -361,9 +360,8 @@ MtMoon3Script13:
 	xor a
 	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
 	call StopAllMusic
-	ld c, BANK(Music_MeetJessieJames)
-	ld a, MUSIC_MEET_JESSIE_JAMES
-	call PlayMusic
+	ld a, Mus_MeetJessieJames
+	call PlayMusicID
 	ld a, $ff
 	ld [wJoyIgnore], a
 	ld a, $e

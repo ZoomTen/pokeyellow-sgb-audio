@@ -491,11 +491,8 @@ Printer_PlayPrinterMusic:
 	call Printer_FadeOutMusicAndWait
 	ld a, [wAudioROMBank]
 	ld [wAudioSavedROMBank], a
-	ld a, BANK(Music_GBPrinter)
-	ld [wAudioROMBank], a
-	ld a, MUSIC_GB_PRINTER
-	ld [wNewSoundID], a
-	call PlaySound
+	ld a, Mus_GBPrinter
+	call PlayMusicID
 	ret
 
 Printer_PlayMapMusic:

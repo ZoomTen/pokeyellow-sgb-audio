@@ -45,9 +45,8 @@ PokemonTower7Script_60d2a:
 	SetEvent EVENT_BEAT_POKEMONTOWER_7_TRAINER_1
 .asm_60d47
 	call StopAllMusic
-	ld c, BANK(Music_MeetJessieJames)
-	ld a, MUSIC_MEET_JESSIE_JAMES
-	call PlayMusic
+	ld a, Mus_MeetJessieJames
+	call PlayMusicID
 	xor a
 	ldh [hJoyHeld], a
 	ld a, $FF ^ (A_BUTTON | B_BUTTON)
@@ -181,10 +180,8 @@ PokemonTower7Script8:
 	call DisplayTextID
 	xor a
 	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
-	call StopAllMusic
-	ld c, BANK(Music_MeetJessieJames)
-	ld a, MUSIC_MEET_JESSIE_JAMES
-	call PlayMusic
+	ld a, Mus_MeetJessieJames
+	call PlayMusicID
 	ld a, $ff
 	ld [wJoyIgnore], a
 	ld a, $9
