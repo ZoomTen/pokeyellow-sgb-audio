@@ -79,10 +79,10 @@ PalletMovementScript_OakMoveLeft:
 	ld a, $3
 	ld [wNPCMovementScriptFunctionNum], a
 .done
-	ld a, BANK(Music_MuseumGuy)
-	ld c, a
-	ld a, MUSIC_MUSEUM_GUY
-	call PlayMusic
+	xor a
+	ld [wCheckAndFadeMusicID], a
+	ld a, Mus_FollowMe
+	call PlayMusicID
 	ld hl, wFlags_D733
 	set 1, [hl]
 	ld a, $fc

@@ -1934,7 +1934,6 @@ LoadMapMusic::
 	call BankswitchCommon
 	ld hl, MapSongIDs
 	add hl, bc
-	add hl, bc
 	ld a, [hli]
 	ld [wMapMusicSoundID], a ; music 1
 	pop af

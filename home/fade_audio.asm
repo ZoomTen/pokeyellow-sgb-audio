@@ -39,7 +39,7 @@ FadeOutAudio::
 	ld b, a
 	xor a
 	ld [wAudioFadeOutControl], a
-	call StopAllMusic
+	;call StopAllMusic
 	ld a, [wAudioSavedROMBank]
 	ld [wAudioROMBank], a
 	ld a, b

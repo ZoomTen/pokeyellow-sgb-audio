@@ -132,9 +132,8 @@ DisplayTitleScreen:
 	call LoadScreenTilesFromBuffer1
 	ld c, 36
 	call DelayFrames
-	ld a, SFX_INTRO_WHOOSH
+	ld a, $FF
 	call PlaySound
-
 ; scroll game version in from the right
 	callfar TitleScreen_PlacePikaSpeechBubble
 	ld a, SCREEN_HEIGHT_PX

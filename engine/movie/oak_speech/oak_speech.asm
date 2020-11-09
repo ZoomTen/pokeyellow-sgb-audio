@@ -132,16 +132,6 @@ OakSpeech:
 	lb bc, BANK(ShrinkPic2), $00
 	call IntroDisplayPicCenteredOrUpperRight
 	call ResetPlayerSpriteData
-	ldh a, [hLoadedROMBank]
-	push af
-	ld a, BANK(Music_PalletTown)
-	ld [wAudioROMBank], a
-	ld [wAudioSavedROMBank], a
-	ld a, 10
-	ld [wAudioFadeOutControl], a
-	call StopAllMusic
-	pop af
-	call BankswitchCommon
 	ld c, 20
 	call DelayFrames
 	hlcoord 6, 5
