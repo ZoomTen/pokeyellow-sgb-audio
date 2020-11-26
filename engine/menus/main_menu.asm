@@ -10,6 +10,9 @@ MainMenu:
 
 	predef LoadSAV
 
+	xor a
+	ld [wCurrentMusicID], a ; so that the map music fades in
+
 .mainMenuLoop
 	ld c, 20
 	call DelayFrames

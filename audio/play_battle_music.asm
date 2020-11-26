@@ -1,6 +1,7 @@
 PlayBattleMusic::
 	xor a
 	ld [wAudioFadeOutControl], a
+	ld [wCheckAndFadeMusicID], a
 	ld [wLowHealthAlarm], a
 	call StopAllMusic
 	call DelayFrame
