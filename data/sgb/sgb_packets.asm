@@ -288,4 +288,7 @@ DuckMusicPacket:: DATA_SND $1807, $0, 1
 UnduckMusicPacket:: DATA_SND $1807, $0, 1
 	db  0
 	ds 10, 0
+FadeToSilenceMusicPacket:: DATA_SND $1800, $0, 1
+	db  %00000010
+	ds 10, 0
 INCLUDE "audio/msu1/_bootstrap.asm"

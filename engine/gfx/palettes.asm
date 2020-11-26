@@ -653,6 +653,19 @@ Trn_UnduckMusic::
 	call SendSGBPacket
 	reti
 
+Trn_FadeToSilence::
+	di
+	ld a, [wOnSGB]
+	and a
+	jr nz, .sgb
+	call SGBorGBC
+	jr nc, .sgb
+	reti
+.sgb
+	ld hl, FadeToSilenceMusicPacket
+	call SendSGBPacket
+	reti
+
 
 TransferPacket::
 	; de = pointer to the transfer data

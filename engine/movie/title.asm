@@ -212,6 +212,16 @@ DisplayTitleScreen:
 	jp .titleScreenLoop
 
 .doTitlescreenReset
+	ld a, [wOnSGB]
+	and a
+	jr nz, .sgb
+	call SGBorGBC
+	jr nc, .sgb
+	jr .normal
+.sgb
+	callfar Trn_FadeToSilence
+.normal
+	ld a, 4
 	ld [wAudioFadeOutControl], a
 	call StopAllMusic
 .audioFadeLoop
