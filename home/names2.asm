@@ -80,10 +80,10 @@ GetName::
 	ld bc, $14
 	call CopyData
 .gotPtr
-	ld a, e
-	ld [wUnusedCF8D], a
-	ld a, d
-	ld [wUnusedCF8D + 1], a
+	;ld a, e
+	;ld [wUnusedCF8D], a
+	;ld a, d
+	;ld [wUnusedCF8D + 1], a
 	pop de
 	pop bc
 	pop hl

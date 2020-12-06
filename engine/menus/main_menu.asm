@@ -109,6 +109,7 @@ MainMenu:
 	call GBPalWhiteOutWithDelay3
 	call ClearScreen
 	farcall LoadTilesetHeaderOnly	; force a tileset header reload, this should fix needing WtW on vanilla save files
+	call ReloadMapAfterSave
 	ld a, PLAYER_DIR_DOWN
 	ld [wPlayerDirection], a
 	ld c, 10

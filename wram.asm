@@ -3459,19 +3459,6 @@ wEnemyMonNicks:: ds NAME_LENGTH * PARTY_LENGTH
 
 ENDU
 
-wCurrentMusicID:: db
-wMusicIDBank:: db
-wCheckAndFadeMusicID::
-	; FR
-	; 00 = don't fade, repeat music ID
-	; 01 = don't fade, don't repeat music ID
-	; 10 = fade,       repeat ID
-	; 11 = fade,       don't repeat music ID
-	db
-
-wMSU1PacketSend:: ds 16
-
-
 wTrainerHeaderPtr::
 	ds 2
 
@@ -3546,6 +3533,17 @@ wdef5:: ds 1
 wBGPPalsBuffer:: ds NUM_ACTIVE_PALS * PALETTE_SIZE
 
 
+wCurrentMusicID:: db
+wMusicIDBank:: db
+wCheckAndFadeMusicID::
+	; FR
+	; 00 = don't fade, repeat music ID
+	; 01 = don't fade, don't repeat music ID
+	; 10 = fade,       repeat ID
+	; 11 = fade,       don't repeat music ID
+	db
+
+wMSU1PacketSend:: ds 16
 SECTION "Stack", WRAMX
 
 wStack::

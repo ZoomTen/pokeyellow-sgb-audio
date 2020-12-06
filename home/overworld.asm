@@ -1829,16 +1829,7 @@ asm_0dbd:
 	ldh [hPreviousTileset], a
 	bit 7, b
 	ret nz
-	call GetMapHeaderPointer
-; copy the first 10 bytes (the fixed area) of the map data to D367-D370
-	ld de, wCurMapTileset
-	ld c, $0a
-.copyFixedHeaderLoop
-	ld a, [hli]
-	ld [de], a
-	inc de
-	dec c
-	jr nz, .copyFixedHeaderLoop
+	call LoadMapPointers
 ; initialize all the connected maps to disabled at first, before loading the actual values
 	ld a, $ff
 	ld [wMapConn1Ptr], a
@@ -1939,6 +1930,19 @@ LoadMapMusic::
 	pop af
 	call BankswitchCommon
 	ret
+
+
+LoadMapPointers::
+	call GetMapHeaderPointer
+	ld de, wCurMapTileset
+	ld c, $0a
+.copyFixedHeaderLoop
+	ld a, [hli]
+	ld [de], a
+	inc de
+	dec c
+	ret z
+	jr .copyFixedHeaderLoop
 
 ; function to copy map connection data from ROM to WRAM
 ; Input: hl = source, de = destination
@@ -2071,6 +2075,13 @@ CopyMapViewToVRAM2:
 .noCarry
 	dec b
 	jr nz, .vramCopyLoop
+	ret
+
+ReloadMapAfterSave::
+	ld a, [wCurMap]
+	call SwitchToMapRomBank
+	call LoadMapPointers
+	call BankswitchBack
 	ret
 
 ; function to switch to the ROM bank that a map is stored in
