@@ -257,7 +257,7 @@ SpritePositionBankswitch::
 
 CheckForEngagingTrainers::
 	xor a
-	;call ReadTrainerHeaderInfo       ; read trainer flag's bit (unused)
+	call ReadTrainerHeaderInfo       ; read trainer flag's bit (unused)
 	ld d, h                          ; store trainer header address in de
 	ld e, l
 .trainerLoop
